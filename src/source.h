@@ -35,10 +35,10 @@
 
 
 struct source: sc_module {
-  sc_in<bool> data_req; 
+  sc_in<bool> out_data_req; 
   sc_out<float> out_real;
   sc_out<float> out_imag; 
-  sc_out<bool> data_valid;
+  sc_out<bool> out_data_valid;
   sc_in_clk    CLK;
 
   SC_CTOR(source)

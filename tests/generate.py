@@ -1,7 +1,7 @@
 import math
 import matplotlib.pyplot as plt
 
-FREQ_HZ = 50
+FREQ_HZ = 650
 SAMPLING_FREQ = 4096
 
 output_str = []

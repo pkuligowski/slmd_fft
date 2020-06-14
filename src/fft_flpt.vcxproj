@@ -203,11 +203,13 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sink.cpp" />
     <ClCompile Include="source.cpp" />
+    <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fft.h" />
     <ClInclude Include="sink.h" />
     <ClInclude Include="source.h" />
+    <ClInclude Include="window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

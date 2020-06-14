@@ -35,8 +35,8 @@
 
 
 struct sink: sc_module {
- sc_in<bool>  data_ready; 
- sc_out<bool> data_ack; 
+ sc_in<bool>  in_data_ready; 
+ sc_out<bool> in_data_ack; 
  sc_in<float> in_real; 
  sc_in<float> in_imag; 
  sc_in_clk    CLK;
