@@ -39,7 +39,8 @@
 #include "math.h"
 
 void fft::entry()
-{ float sample[16][2];
+{
+  float sample[4096][2];
   unsigned int index;
 
   while(true)
@@ -48,7 +49,7 @@ void fft::entry()
     index = 0;
     //Reading in the Samples
       cout << endl << "Reading in the samples..." << endl;
-      while( index < 16 )
+      while( index < 4096 )
       {
        data_req.write(true);
        do { wait(); } while (data_valid == true);
@@ -68,10 +69,10 @@ void fft::entry()
       //Size of FFT, N = 2**M    
        unsigned int N, M, len ;  
        float theta; 
-       float W[7][2], w_real, w_imag, w_rec_real, w_rec_imag, w_temp;
+	   float W[2048][2], w_real, w_imag, w_rec_real, w_rec_imag, w_temp;
 
        //Initialize
-       M = 4; N = 16; 
+	   M = 12; N = 4096;
        len = N/2;
        theta = 8.0*atan(1.0)/N;
 
@@ -166,19 +167,27 @@ void fft::entry()
      //////////////////////////////////////////////////////////////////////////
      
      //Writing out the normalized transform values in bit reversed order
-      sc_uint<4> bits_i;
-      sc_uint<4> bits_index;
+      sc_uint<12> bits_i;
+      sc_uint<12> bits_index;
       bits_i = 0;
       i = 0;
 
       cout << "Writing the transform values..." << endl;
-      while( i < 16)
+	  while (i < 1024)
       {
        bits_i = i;
-       bits_index[3]= bits_i[0];
-       bits_index[2]= bits_i[1];
-       bits_index[1]= bits_i[2];
-       bits_index[0]= bits_i[3];
+	   bits_index[11]= bits_i[0];
+	   bits_index[10]= bits_i[1];
+       bits_index[9]= bits_i[2];
+       bits_index[8]= bits_i[3];
+       bits_index[7]= bits_i[4];
+       bits_index[6]= bits_i[5];
+	   bits_index[5]= bits_i[6];
+	   bits_index[4]= bits_i[7];
+	   bits_index[3]= bits_i[8];
+	   bits_index[2]= bits_i[9];
+	   bits_index[1]= bits_i[10];
+	   bits_index[0]= bits_i[11];
        index = bits_index;
        out_real.write(sample[index][0]);
        out_imag.write(sample[index][1]);
