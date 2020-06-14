@@ -43,7 +43,7 @@ void source::entry()
   float tmp_val;
 
   fp_real = fopen("in_real", "r");
-  fp_imag = fopen("in_imag", "r");
+  //fp_imag = fopen("in_imag", "r");
 
   data_valid.write(false);
 
@@ -56,12 +56,13 @@ void source::entry()
         break;
 	};
     out_real.write(tmp_val);
-    if (fscanf(fp_imag,"%f \n",&tmp_val) == EOF)
-      { cout << "End of Input Stream: Simulation Stops" << endl;
-        sc_stop();
-	break;
-	};
-    out_imag.write(tmp_val);
+    //if (fscanf(fp_imag,"%f \n",&tmp_val) == EOF)
+    //  { cout << "End of Input Stream: Simulation Stops" << endl;
+    //    sc_stop();
+	//break;
+	//};
+    //out_imag.write(tmp_val);
+	out_imag.write(0);
     data_valid.write(true);
     do { wait(); } while ( !(data_req == false) );
     data_valid.write(false);

@@ -54,6 +54,6 @@ struct sink: sc_module {
   ~sink()
   {
     fclose( fp_real );
-    fclose( fp_imag );
+    //fclose( fp_imag );
   }
 };
