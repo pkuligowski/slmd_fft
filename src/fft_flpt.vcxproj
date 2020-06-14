@@ -71,6 +71,8 @@
     <OutDir>$(ProjectDir)\$(IntDir)</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>..\lib\systemc-2.3.1\src;$(IncludePath)</IncludePath>
+    <LibraryPath>..\lib\systemc-2.3.1\msvc80\SystemC\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(ProjectDir)\$(IntDir)</OutDir>
