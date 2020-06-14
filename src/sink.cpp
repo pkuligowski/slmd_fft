@@ -41,7 +41,7 @@
 void sink::entry()
 {
  fp_real = fopen("out_real","w");
- fp_imag = fopen("out_imag","w");
+ //fp_imag = fopen("out_imag", "w");
 
  data_ack.write(false);
 
@@ -49,7 +49,7 @@ void sink::entry()
  { 
    do { wait(); } while ( !(data_ready == true) );
    fprintf(fp_real,"%e  \n",in_real.read());
-   fprintf(fp_imag,"%e  \n",in_imag.read());
+   //fprintf(fp_imag,"%e  \n",in_imag.read());
    data_ack.write(true);
    do { wait(); } while ( !(data_ready == false) );
    data_ack.write(false); 

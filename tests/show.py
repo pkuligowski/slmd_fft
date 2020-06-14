@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-f = open("src/Debug/out_real", "r")
+f = open("../src/Debug/out_real", "r")
 lines = f.read().replace('\r', '').split('\n')
 
 samples = []

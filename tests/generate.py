@@ -13,11 +13,11 @@ for i in range(0, SAMPLING_FREQ):
     output_str.append(str(round(value, 3)))
     imag.append(str(0))
 
-file_real = open('src/Debug/in_real', 'wb')
+file_real = open('../src/Debug/in_real', 'wb')
 file_real.write("\n".join(output_str).encode() + "\n".encode())
 file_real.close()
 
-file_real = open('src/Debug/in_imag', 'wb')
+file_real = open('../src/Debug/in_imag', 'wb')
 file_real.write("\n".join(imag).encode() + "\n".encode())
 file_real.close()
 
