@@ -37,12 +37,12 @@
 struct fft: sc_module {
   sc_in<float> in_real;   
   sc_in<float> in_imag;   
-  sc_in<bool> data_valid; 
-  sc_in<bool> data_ack;   
+  sc_in<bool> in_data_valid; 
+  sc_in<bool> out_data_ack;   
   sc_out<float> out_real;        
   sc_out<float> out_imag;        
-  sc_out<bool> data_req;         
-  sc_out<bool> data_ready;       
+  sc_out<bool> in_data_req;         
+  sc_out<bool> out_data_ready;       
   sc_in_clk CLK;
 
  

@@ -44,19 +44,19 @@ void fft::entry()
   unsigned int index;
 
   while(true)
-  { data_req.write(false);
-    data_ready.write(false);
+  { in_data_req.write(false);
+    out_data_ready.write(false);
     index = 0;
     //Reading in the Samples
       cout << endl << "Reading in the samples..." << endl;
       while( index < 4096 )
       {
-       data_req.write(true);
-       do { wait(); } while (data_valid == true);
+       in_data_req.write(true);
+       do { wait(); } while (in_data_valid == false);
        sample[index][0] = in_real.read();
        sample[index][1] = in_imag.read();
        index++;
-       data_req.write(false);
+       in_data_req.write(false);
        wait();
       }
       index = 0;
@@ -191,9 +191,9 @@ void fft::entry()
        index = bits_index;
        out_real.write(sample[index][0]);
        out_imag.write(sample[index][1]);
-       data_ready.write(true);
-       do { wait(); } while ( !(data_ack == true) );
-       data_ready.write(false);
+       out_data_ready.write(true);
+       do { wait(); } while ( !(out_data_ack == true) );
+       out_data_ready.write(false);
        i++;
        wait();
       }

@@ -37,6 +37,7 @@
 
 #include "systemc.h"
 #include "fft.h"
+#include "window.h"
 #include "source.h"
 #include "sink.h"
 
@@ -44,38 +45,54 @@ int sc_main(int , char*[])
 {
  sc_signal<float> in_real;
  sc_signal<float> in_imag;
- sc_signal<bool> data_valid;
- sc_signal<bool> data_ack;
- sc_signal<float> out_real;
- sc_signal<float> out_imag;
- sc_signal<bool> data_req;
- sc_signal<bool> data_ready;
+ sc_signal<bool> in_data_valid;
+ sc_signal<bool> window_data_valid;
+ sc_signal<bool> fft_data_ack;
+ sc_signal<float> window_real;
+ sc_signal<float> window_imag;
+ sc_signal<float> fft_real;
+ sc_signal<float> fft_imag;
+ sc_signal<bool> in_data_req;
+ sc_signal<bool> window_data_req;
+ sc_signal<bool> fft_data_ready;
 
  sc_clock clock("CLOCK", 10, SC_NS, 0.5, 0.0, SC_NS);
 
- fft FFT1("FFTPROCESS"); 
- FFT1.in_real(in_real);
- FFT1.in_imag(in_imag);
- FFT1.data_valid(data_valid);
- FFT1.data_ack(data_ack);
- FFT1.out_real(out_real);
- FFT1.out_imag(out_imag);
- FFT1.data_req(data_req);
- FFT1.data_ready(data_ready);
- FFT1.CLK(clock);
-
  source SOURCE1("SOURCEPROCESS");
- SOURCE1.data_req(data_req);
+ SOURCE1.out_data_req(in_data_req);
  SOURCE1.out_real(in_real);
  SOURCE1.out_imag(in_imag);
- SOURCE1.data_valid(data_valid);
+ SOURCE1.out_data_valid(in_data_valid);
  SOURCE1.CLK(clock);
- 
+
+ window WINDOW1("WINDOWPROCESS");
+ WINDOW1.in_real(in_real);
+ WINDOW1.in_imag(in_imag);
+ WINDOW1.in_data_valid(in_data_valid);
+ WINDOW1.in_data_req(in_data_req);
+
+ WINDOW1.out_data_req(window_data_req);
+ WINDOW1.out_real(window_real);
+ WINDOW1.out_imag(window_imag);
+ WINDOW1.out_data_valid(window_data_valid);
+ WINDOW1.CLK(clock);
+
+ fft FFT1("FFTPROCESS"); 
+ FFT1.in_real(window_real);
+ FFT1.in_imag(window_imag);
+ FFT1.in_data_valid(window_data_valid);
+ FFT1.in_data_req(window_data_req);
+ FFT1.out_data_ack(fft_data_ack);
+ FFT1.out_real(fft_real);
+ FFT1.out_imag(fft_imag);
+ FFT1.out_data_ready(fft_data_ready);
+ FFT1.CLK(clock);
+
  sink SINK1("SINKPROCESS");
- SINK1.data_ready(data_ready);
- SINK1.data_ack(data_ack);
- SINK1.in_real(out_real);
- SINK1.in_imag(out_imag);
+ SINK1.in_data_ready(fft_data_ready);
+ SINK1.in_data_ack(fft_data_ack);
+ SINK1.in_real(fft_real);
+ SINK1.in_imag(fft_imag);
  SINK1.CLK(clock);
 
  sc_start();
