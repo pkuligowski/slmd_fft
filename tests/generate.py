@@ -2,17 +2,18 @@ import math
 import matplotlib.pyplot as plt
 import random
 
-FREQ_HZ = 50
-SAMPLING_FREQ = 4096
-NOISE_AMPLITUDE = 0.1
+FREQ_HZ = 20000
+WINDOW_WIDTH = 4095
+NOISE_AMPLITUDE = 0.0
+SAMPLING_FREQ = 44100
 
 output_str = []
 output = []
 imag = []
-for i in range(0, SAMPLING_FREQ):
-    value = math.sin(2 * math.pi * (i % (SAMPLING_FREQ / FREQ_HZ)) / (SAMPLING_FREQ / FREQ_HZ)) + (random.random()-0.5) * 2 * NOISE_AMPLITUDE
+for i in range(0, WINDOW_WIDTH):
+    value = math.sin(2 * math.pi * (i % (WINDOW_WIDTH / (FREQ_HZ/(SAMPLING_FREQ/WINDOW_WIDTH)))) / (WINDOW_WIDTH / (FREQ_HZ/(SAMPLING_FREQ/WINDOW_WIDTH)))) + (random.random()-0.5) * 2 * NOISE_AMPLITUDE
     output.append(value)
-    output_str.append(str(round(value, 3)))
+    output_str.append(str(value))
     imag.append(str(0))
 
 file_real = open('../src/Debug/in_real', 'wb')
