@@ -12,3 +12,4 @@
 
 # Helpful links
 * Short and nice FFT theory explanation: [Fast Fourier Transform (FFT) input and output to analyse the frequency of audio files in Java?](https://stackoverflow.com/questions/6620544/fast-fourier-transform-fft-input-and-output-to-analyse-the-frequency-of-audio)
+* DFT with (Decimation In Frequency) DIF or DIT (Decimation In Time): http://www2.im.uj.edu.pl/katedry/seminaria/inda/wp-content/uploads/2010.01.11%20Transformata%20Fouriera.pdf
