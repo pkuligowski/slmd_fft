@@ -1,40 +1,42 @@
 #include "systemc.h"
 #include "window.h"
 #include "math.h"
+#include "config.h"
 #include "window_hamming.h"
 #include "window_blackman.h"
 
+
 void window::entry()
 {
-	float sample[4096][2];
+	float probki[LICZBA_PROBEK];
 	unsigned int index;
 
 	while (true)
 	{
 		index = 0;
-		in_data_req.write(false);
-		out_data_valid.write(false);
+		in_data_request.write(false);
+		out_data_ready.write(false);
 
-		cout << endl << "Window is reading the samples..." << endl;
-		while (index < 4096)
+		while (index < LICZBA_PROBEK)
 		{
-			in_data_req.write(true);
-			do { wait(); } while (!(in_data_valid == false));
-			sample[index][0] = in_real.read();
-			sample[index][1] = in_imag.read();
+			in_data_request.write(true);
+			do { wait(); } while (!(in_data_ready == false));
+			probki[index] = in_data.read();
 			index++;
-			in_data_req.write(false);
+			in_data_request.write(false);
 			wait();
 		}
 
 		index = 0;
-		while (index < 4096)
+		while (index < LICZBA_PROBEK)
 		{
-			out_real.write(sample[index][0] * WINDOW_BLACKMAN[index]);
-			out_imag.write(sample[index][1]);
-			out_data_valid.write(true);
-			do { wait(); } while (!(out_data_req == false));
-			out_data_valid.write(false);
+			out_data.write(probki[index] * WINDOW_HAMMING[index]);
+			out_data_ready.write(true);
+			while (out_data_request)
+			{
+				wait();
+			}
+			out_data_ready.write(false);
 			index++;
 			wait();
 		}
