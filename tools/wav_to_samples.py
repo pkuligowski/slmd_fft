@@ -1,5 +1,5 @@
 from scipy.io import wavfile
-sampling_frequency, samples = wavfile.read('piano.wav')
+sampling_frequency, samples = wavfile.read('stuk.wav')
 
 print("Sampling frequency: " + str(sampling_frequency))
 print("Number of samples: " + str(len(samples)))

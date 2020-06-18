@@ -202,17 +202,14 @@
     <ClCompile Include="fft.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sink.cpp" />
-    <ClCompile Include="sink_zmq.cpp" />
     <ClCompile Include="source.cpp" />
-    <ClCompile Include="source_stdin.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="config.h" />
     <ClInclude Include="fft.h" />
     <ClInclude Include="sink.h" />
-    <ClInclude Include="sink_zmq.h" />
     <ClInclude Include="source.h" />
-    <ClInclude Include="source_stdin.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="window_blackman.h" />
     <ClInclude Include="window_hamming.h" />

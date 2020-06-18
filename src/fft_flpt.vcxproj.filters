@@ -30,12 +30,6 @@
     <ClCompile Include="window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sink_zmq.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source_stdin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fft.h">
@@ -50,16 +44,13 @@
     <ClInclude Include="window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sink_zmq.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source_stdin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="window_hamming.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="window_blackman.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
